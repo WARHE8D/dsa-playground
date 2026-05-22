@@ -101,6 +101,32 @@ public class Main {
         return n;
     }
 
+    //insert before value
+    //assuming the val exists in node and n!=null
+    public static Node InsertBeforeValue(Node n,int newVal,int val){
+        if(n==null) return null;
+
+        //only 1 node present
+        if(n.next==null) {
+            if (n.data == val) {
+                return new Node(newVal, n);
+            } else return n;
+        }
+
+        Node mover = n;
+        Node prev = n;
+        while(mover!=null){
+           if(val == mover.data){
+                Node newNode = new Node(newVal,prev.next);
+                prev.next = newNode;
+                break;
+           }
+           prev = mover;
+           mover = mover.next;
+        }
+        return n;
+    }
+
     //Delete LL Head
     // returning n.next moves the head to the second node,
     // making the first node unreachable and eligible for 'garbage collection'
@@ -192,5 +218,10 @@ public class Main {
         Node InsertAt = InsertValAtPosition(n,13,3);
         System.out.println("Insert At Val:");
         TraverseLL(InsertAt);
+
+
+        Node insertBeforeVal = InsertBeforeValue(n,17,19);
+        System.out.println("Insert Before Val:");
+        TraverseLL(insertBeforeVal);
     }
 }
