@@ -80,6 +80,26 @@ public class Main {
         return n;
     }
 
+    public static Node InsertValAtPosition(Node n,int newVal,int position){
+        if(n==null) {
+            if(position==1)
+                return InsertHead(n,newVal);//head
+            else return null;
+        }
+        Node mover = n;
+        int count = 1;
+        while(mover!=null){
+            count++;
+            if(count == position){
+                Node newNode = new Node(newVal);
+                newNode.next = mover.next;
+                mover.next = newNode;
+                break;
+            }
+            mover = mover.next;
+        }
+        return n;
+    }
 
     //Delete LL Head
     // returning n.next moves the head to the second node,
@@ -167,5 +187,10 @@ public class Main {
         Node insertTail = InsertTail(n,19);
         System.out.println("Insert Tail Val:");
         TraverseLL(insertTail);
+
+
+        Node InsertAt = InsertValAtPosition(n,13,3);
+        System.out.println("Insert At Val:");
+        TraverseLL(InsertAt);
     }
 }
