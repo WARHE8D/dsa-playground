@@ -1,8 +1,6 @@
 package linkedlist.problems;
 
-import javax.management.openmbean.ArrayType;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CircularQueue {
 
