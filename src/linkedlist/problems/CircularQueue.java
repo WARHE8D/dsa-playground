@@ -1,82 +1,51 @@
 package linkedlist.problems;
 
+import javax.management.openmbean.ArrayType;
+import java.util.ArrayList;
+import java.util.List;
+
 public class CircularQueue {
 
-    public static class Node {
-        int data;
-        Node next;
-        Node prev;
+    static class MyCircularQueue {
 
-        public Node(int data) {
-            this.data = data;
-        }
-    }
-
-    public static class MyCircularQueue {
-
-        Node left = new Node(-1);   // dummy head
-        Node right = new Node(-1);  // dummy tail
-
-        int size = 0;
+        ArrayList<Integer> node;
+        int size=0;
         int k;
-
         public MyCircularQueue(int k) {
-            this.k = k;
-
-            left.next = right;
-            right.prev = left;
+            this.node = new ArrayList<>();
+            this.k=k;
         }
 
-        boolean enQueue(int data) {
-
-            if (isFull()) return false;
-
-            Node newN = new Node(data);
-
-            Node last = right.prev;
-
-            last.next = newN;
-            newN.prev = last;
-
-            newN.next = right;
-            right.prev = newN;
-
+        public boolean enQueue(int value) {
+            if(isFull()) return false;
+            node.add(value);
             size++;
             return true;
         }
 
-        boolean deQueue() {
-
-            if (isEmpty()) return false;
-
-            Node first = left.next;
-
-            left.next = first.next;
-            first.next.prev = left;
-
-            first.next = null;
-            first.prev = null;
-
+        public boolean deQueue() {
+            if(isEmpty()) return  false;
+            node.removeFirst();
             size--;
             return true;
         }
 
-        int Front() {
-            if (isEmpty()) return -1;
-            return left.next.data;
+        public int Front() {
+            if(isEmpty()) return -1;
+            return node.getFirst();
         }
 
-        int Rear() {
-            if (isEmpty()) return -1;
-            return right.prev.data;
+        public int Rear() {
+            if(isEmpty()) return -1;
+            return node.getLast();
         }
 
-        boolean isEmpty() {
-            return size == 0;
+        public boolean isEmpty() {
+            return node.isEmpty();
         }
 
-        boolean isFull() {
-            return size == k;
+        public boolean isFull() {
+            return k == size;
         }
     }
 
